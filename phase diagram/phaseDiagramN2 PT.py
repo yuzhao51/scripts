@@ -54,11 +54,11 @@ plt.axvline(Tc, dashes = [2, 2])
 plt.axhline(pc, dashes = [2, 2])
 
 # Labels for regions
-plt.text(2.2*Tc, 3.2*pc, 'supercritical gas',ha= 'center')
-plt.text(2.2*Tc, 0.6*pc, 'superheated gas', rotation = 0,ha= 'center')#,color="magenta"
-plt.text(0.35*Tc, 3.2*pc, 'supercritical liquid', rotation = 0, ha = 'center')
-plt.text(0.45*Tc, 0.3*pc, 'liquid', rotation = 45)
-plt.text(0.65*Tc, 0.05*pc, 'gas', rotation = 45) 
+plt.text(1.9*Tc, 3.2*pc, 'supercritical gas',ha= 'center')
+plt.text(1.9*Tc, 0.6*pc, 'superheated gas', rotation = 0,ha= 'center')#,color="magenta"
+plt.text(0.55*Tc, 3.2*pc, 'supercritical liquid', rotation = 0, ha = 'center')
+plt.text(0.55*Tc, 0.2*pc, 'liquid', rotation = 45)
+plt.text(0.75*Tc, 0.05*pc, 'gas', rotation = 45) 
 
 # ------
 # Plot
@@ -86,23 +86,14 @@ vertices = [(120, 33e5), (132, 33e5), (132, 35e5), (120, 35e5)]
 polygon = patches.Polygon(vertices, closed=True, zorder=2, color='#BD5FA7', alpha=0.5)
 patches , colors_p = [polygon], ['#BD5FA7']
 
-# ax.add_patch(aerostorage)
-# ax.add_patch(fcv)
-# To not add each rectangle with ax.add patch, I can do the following
-# doing so I don't need to specify the color for each rectangle, as it will be added in the color list
-# from https://stackoverflow.com/questions/10550477/how-do-i-set-color-to-rectangle-in-matplotlib Reply 4
 from matplotlib.colors import ListedColormap
 from matplotlib.collections import PatchCollection
 our_cmap = ListedColormap(colors_p)
-# p = PatchCollection(patches, cmap=our_cmap)
-# p.set_array(np.arange(len(patches)))
-# adding the option  match_original=True when I pass the collections, will store the original setting of the rectangles, as the color
-# and most important the transparency
+
 p = PatchCollection(patches, match_original=True)
-# p = matplotlib.collections.PatchCollection(patches) #, cmap=matplotlib.cm.jet)
+
 ax.add_collection(p)
-# # This will put the legend above the graph
-# ax.legend(handles=patches,bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left',ncols=2, mode="expand", borderaxespad=0.)
+
 ax.legend(handles=patches, bbox_to_anchor=(0.99, 0.01), loc='lower right',ncols=1,  borderaxespad=0.)
 
 # ------
@@ -152,41 +143,33 @@ start_point_legend = mlines.Line2D([], [], color='orange', marker='o', linestyle
 end_point_legend = mlines.Line2D([], [], color='red', marker='o', linestyle='None', markersize=6, alpha=0.6, label='LN2 refuelling end')
 
 
-
-#plt.plot([26.6],[5e6],"o",ms=9,color ="purple" , label = "H2 JIC Simulated: Injection Points")
-#plt.plot([395],[5e6],"o",ms=9,color ="magenta" , label = "H2 JIC Simulated: Release Conditions")
-
-
-# Create the rectangle
-
-# Custom legend patches
 ax.add_patch(polygon)
 gtinj_legend = mpatches.Patch(color='#BD5FA7', alpha=0.5, label='Supercritical region of focus')
 
 #####################################################################################################################
 
-arrow_near1 = mpatches.FancyArrowPatch((T_in, P_in[1]), (xt[1], yt[1]), mutation_scale=10,
-                                   color="blue",alpha=0.6) 
-arrow_near2 = mpatches.FancyArrowPatch((T_in, P_in[2]), (xt[2], yt[2]), mutation_scale=10,
-                                   color="blue",alpha=0.6) 
-arrow_near3 = mpatches.FancyArrowPatch((T_in, P_in[3]), (xt[3], yt[3]), mutation_scale=10,
-                                   color="blue",alpha=0.6) 
-arrow_near4 = mpatches.FancyArrowPatch((T_in, P_in[0]), (xt[0], yt[0]), mutation_scale=10,
-                                   color="blue",alpha=0.6) 
+#arrow_near1 = mpatches.FancyArrowPatch((T_in, P_in[1]), (xt[1], yt[1]), mutation_scale=10,
+#                                   color="blue",alpha=0.6) 
+#arrow_near2 = mpatches.FancyArrowPatch((T_in, P_in[2]), (xt[2], yt[2]), mutation_scale=10,
+#                                   color="blue",alpha=0.6) 
+#arrow_near3 = mpatches.FancyArrowPatch((T_in, P_in[3]), (xt[3], yt[3]), mutation_scale=10,
+#                                   color="blue",alpha=0.6) 
+#arrow_near4 = mpatches.FancyArrowPatch((T_in, P_in[0]), (xt[0], yt[0]), mutation_scale=10,
+#                                   color="blue",alpha=0.6) 
 
-ax.add_patch(arrow_near1)
-ax.add_patch(arrow_near2)
-ax.add_patch(arrow_near3)
-ax.add_patch(arrow_near4)
+#ax.add_patch(arrow_near1)
+#ax.add_patch(arrow_near2)
+#ax.add_patch(arrow_near3)
+#ax.add_patch(arrow_near4)
 
-ax.add_patch(polygon)
+#ax.add_patch(polygon)
 #arrow_near_legend = mpatches.Patch(color='blue', alpha=0.6, label='Near critical')
-arrow_near_legend = mlines.Line2D([], [], color='blue', linestyle='-', linewidth=2, alpha=0.6, label='N2 spray')
+#arrow_near_legend = mlines.Line2D([], [], color='blue', linestyle='-', linewidth=2, alpha=0.6, label='N2 spray')
 ######
 
 ######################################################################################################################
 #show the legend
-ax.legend(handles=[gtinj_legend, arrow_near_legend, start_point_legend, end_point_legend], loc='lower right')
+ax.legend(handles=[gtinj_legend, start_point_legend, end_point_legend], loc='lower right')
 
 #ax.legend()
 plt.tight_layout()
