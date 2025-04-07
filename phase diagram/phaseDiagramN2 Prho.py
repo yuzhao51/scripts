@@ -63,6 +63,10 @@ ax.grid(True)
 ax.axhline(pc, color='gray', linestyle='--', lw=1)
 ax.axvline(dc, color='gray', linestyle='--', lw=1)
 
+# Save the plot with dots (including refuelling end)
+plt.tight_layout()
+plt.savefig("N2_phase_diagram_rho.png", dpi=1000)
+
 # Simulated Points
 Ts_refuel = [76, 76, 76, 76]
 Ps_refuel = [3.1e5, 21.1e5, 31.1e5, 39.1e5]
@@ -85,7 +89,7 @@ ax.legend(loc='upper left', bbox_to_anchor=(0.05, 0.95), fontsize=12)  # Legend 
 
 # Save the plot with dots (including refuelling end)
 plt.tight_layout()
-plt.savefig("N2_with_Ranges_And_AllPoints.png", dpi=1000)
+plt.savefig("N2_with_Ranges_And_AllPoints_rho.png", dpi=1000)
 
 # Show the plot
 plt.show()
