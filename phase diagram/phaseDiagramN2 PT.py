@@ -156,6 +156,22 @@ gtinj_legend = mpatches.Patch(color='#BD5FA7', alpha=0.5, label='Supercritical r
 #                                   color="blue",alpha=0.6) 
 #arrow_near4 = mpatches.FancyArrowPatch((T_in, P_in[0]), (xt[0], yt[0]), mutation_scale=10,
 #                                   color="blue",alpha=0.6) 
+# Define known values
+Trr = 76  # temperature in Kelvin
+Prr = 21.1e5  # pressure in Pa (3.1 bar)
+
+# Get surface tension at T=76K, using quality to define liquid/vapor boundary
+surface_tension = CP.CoolProp.PropsSI("SURFACE_TENSION", "T", Trr, "Q", 0, "Nitrogen")
+
+print(f"Surface tension of LN2 at T = {Trr} K: {surface_tension:.6f} N/m")
+
+T_aa = 76  # kg/m^3
+P_aa = 1.1e5  # Pa
+
+# Find the rho using CoolProp
+rho_aa = CP.CoolProp.PropsSI('D', 'T', T_aa, 'P', P_aa, 'N2')
+
+print("T_aa = %d ; P_aa = %d ; rho_aa = %.3f" % (T_aa, P_aa, rho_aa))
 
 #ax.add_patch(arrow_near1)
 #ax.add_patch(arrow_near2)
